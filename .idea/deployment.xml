@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="helloneo-jnw" remoteFilesAllowedToDisappearOnAutoupload="false" confirmBeforeUploading="false" compareModeInSync="TEXT">
+    <option name="confirmBeforeUploading" value="false" />
+    <serverData>
+      <paths name="helloneo-jnw">
+        <serverdata>
+          <mappings>
+            <mapping deploy="public_html/helloneo/vc1" local="$PROJECT_DIR$" web="/vc1" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

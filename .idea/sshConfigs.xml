@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="helloneo.ca" id="c3cbc039-442b-4f18-96a6-60d69a4b5f9e" port="22" customName="helloneo-jnw" nameFormat="CUSTOM" username="usagi" useOpenSSHConfig="true">
+        <option name="customName" value="helloneo-jnw" />
+      </sshConfig>
+    </configs>
+  </component>
+</project>

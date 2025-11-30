@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="4dd2716f-b16c-467c-8c78-df7ea43255ed" name="helloneo-jnw" url="http://helloneo.ca">
+        <fileTransfer rootFolder="/home/usagi" accessType="SFTP" host="helloneo.ca" port="22" sshConfigId="c3cbc039-442b-4f18-96a6-60d69a4b5f9e" sshConfig="helloneo-jnw">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" isUseRsync="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
