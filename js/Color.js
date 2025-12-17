@@ -1,7 +1,15 @@
+// VC-1 Computer System
+// Copyright (C) 2023 Appledog Hu
+//
+// SPDX-License-Identifier: GPL-2.0-only WITH VC-1-runtime-exception
+// See LICENSE file for details.
+//
+
 /*
  * ColorMap.java
+ * (C) 2005 Oliver Richman
  *
- * reCreated on December 26, 2005, 9:40 PM
+ * Created (for the second time) on December 26, 2005, 9:40 PM
  *
 // Color defenitions.
 // Can help look up RGB colors by IBM Graphics color number :)
@@ -10,7 +18,7 @@
 *
 */
 
-class ColorMap {
+class Color {
     static BLACK = 0;
     static black = 0;
     static RED = 1;
@@ -65,124 +73,29 @@ class ColorMap {
     static max_color = 16;
     static maxcolor = 16;
 
-    static GRAY = ColorMap.LIGHT_GRAY;
-    static gray = ColorMap.LIGHT_GRAY;
-    static GREY = ColorMap.LIGHT_GREY;
-    static grey = ColorMap.LIGHT_GREY;
-    static HI_DOMESTIC = ColorMap.WHITE;
-    static HI_LORD = ColorMap.MAGENTA;
-    static HI_ZAP = ColorMap.LIGHT_BLUE;
-    static HI_GOLD = ColorMap.YELLOW;
-    static HI_PAPER = ColorMap.WHITE;
-    static HI_LEATHER = ColorMap.BROWN;
-    static HI_WOOD = ColorMap.BROWN;
-    static HI_METAL = ColorMap.LIGHT_GRAY;
-    static DRAGON_SILVER = ColorMap.LIGHT_GRAY;
-    static ORANGE = ColorMap.BROWN;
-    static orange = ColorMap.BROWN;
-    static BRIGHT_GREEN = ColorMap.LIGHT_GREEN;
-    static bright_green = ColorMap.LIGHT_GREEN;
-    static brightgreen = ColorMap.LIGHT_GREEN;
-    static BRIGHT_BLUE = ColorMap.LIGHT_BLUE;
-    static bright_blue = ColorMap.LIGHT_BLUE;
-    static brightblue = ColorMap.LIGHT_BLUE;
+    static GRAY = Color.LIGHT_GRAY;
+    static gray = Color.LIGHT_GRAY;
+    static GREY = Color.LIGHT_GREY;
+    static grey = Color.LIGHT_GREY;
+    static HI_DOMESTIC = Color.WHITE;
+    static HI_LORD = Color.MAGENTA;
+    static HI_ZAP = Color.LIGHT_BLUE;
+    static HI_GOLD = Color.YELLOW;
+    static HI_PAPER = Color.WHITE;
+    static HI_LEATHER = Color.BROWN;
+    static HI_WOOD = Color.BROWN;
+    static HI_METAL = Color.LIGHT_GRAY;
+    static DRAGON_SILVER = Color.LIGHT_GRAY;
+    static ORANGE = Color.BROWN;
+    static orange = Color.BROWN;
+    static BRIGHT_GREEN = Color.LIGHT_GREEN;
+    static bright_green = Color.LIGHT_GREEN;
+    static brightgreen = Color.LIGHT_GREEN;
+    static BRIGHT_BLUE = Color.LIGHT_BLUE;
+    static bright_blue = Color.LIGHT_BLUE;
+    static brightblue = Color.LIGHT_BLUE;
 
-    static colormap = new Array(16);
-
-    constructor() {
-        ColorMap.use_default();
-    }
-
-    static use_default() {
-        ColorMap.use_VGA();
-    }
-
-    // The following is an approximation of IBM PC VGA colors.
-    // I had this table a long time ago and ChatGPT repeated it to me in 2023.
-    static use_VGA() {
-        ColorMap.colormap[ColorMap.BLACK] = '#000000';
-        ColorMap.colormap[ColorMap.RED] = '#aa0000';
-        this.colormap[ColorMap.GREEN] = '#00aa00';
-        this.colormap[ColorMap.BLUE] = '#0000aa';
-        this.colormap[ColorMap.CYAN] = '#00aaaa';
-        this.colormap[ColorMap.MAGENTA] = '#aa00aa';
-        this.colormap[ColorMap.BROWN] = '#aa5500';
-        this.colormap[ColorMap.LIGHT_GRAY] = '#aaaaaa';
-        this.colormap[ColorMap.DARK_GRAY] = '#777777';
-        this.colormap[ColorMap.LIGHT_RED] = '#ff5555';
-        this.colormap[ColorMap.LIGHT_GREEN] = '#55ff55';
-        this.colormap[ColorMap.LIGHT_BLUE] = '#5555ff';
-        this.colormap[ColorMap.LIGHT_CYAN] = '#55ffff';
-        this.colormap[ColorMap.LIGHT_MAGENTA] = '#ff55ff';
-        this.colormap[ColorMap.YELLOW] = '#ffff55';
-        this.colormap[ColorMap.WHITE] = '#ffffff';
-    }
-
-
-
-    static use_eterm() {
-        this.colormap[ColorMap.BLACK] = '#000000';
-        this.colormap[ColorMap.RED] = '#cc0000';
-        this.colormap[ColorMap.GREEN] = '#00cc00';
-        this.colormap[ColorMap.BLUE] = '#0000cc';
-        this.colormap[ColorMap.CYAN] = '#00cccc';
-        this.colormap[ColorMap.MAGENTA] = '#cc00cc';
-        this.colormap[ColorMap.BROWN] = '#cccc00';
-        this.colormap[ColorMap.LIGHT_GRAY] = '#faebd7';
-        this.colormap[ColorMap.DARK_GRAY] = '#333333';
-        this.colormap[ColorMap.LIGHT_RED] = '#ff0000';
-        this.colormap[ColorMap.LIGHT_GREEN] = '#00ff00';
-        this.colormap[ColorMap.LIGHT_BLUE] = '#0000ff';
-        this.colormap[ColorMap.LIGHT_CYAN] = '#00ffff';
-        this.colormap[ColorMap.LIGHT_MAGENTA] = '#ff00ff';
-        this.colormap[ColorMap.YELLOW] = '#ffff00';
-        this.colormap[ColorMap.WHITE] = '#ffffff';
-    }
-
-    static use_gnometerminal() {
-        this.colormap[ColorMap.BLACK] = '#000000';
-        this.colormap[ColorMap.RED] = '#aa0000';
-        this.colormap[ColorMap.GREEN] = '#00aa00';
-        this.colormap[ColorMap.BLUE] = '#0000aa';
-        this.colormap[ColorMap.CYAN] = '#00aaaa';
-        this.colormap[ColorMap.MAGENTA] = '#aa00aa';
-        this.colormap[ColorMap.BROWN] = '#aa5500';
-        this.colormap[ColorMap.LIGHT_GRAY] = '#aaaaaa';
-        this.colormap[ColorMap.DARK_GRAY] = '#555555';
-        this.colormap[ColorMap.LIGHT_RED] = '#ff5555';
-        this.colormap[ColorMap.LIGHT_GREEN] = '#55ff55';
-        this.colormap[ColorMap.LIGHT_BLUE] = '#5555ff';
-        this.colormap[ColorMap.LIGHT_CYAN] = '#55ffff';
-        this.colormap[ColorMap.LIGHT_MAGENTA] = '#ff55ff';
-        this.colormap[ColorMap.YELLOW] = '#ffff55';
-        this.colormap[ColorMap.WHITE] = '#ffffff';
-    }
-
-    static use_ANSI() {
-        this.colormap[ColorMap.BLACK] = '#000000';
-        this.colormap[ColorMap.RED] = '#aa0000';
-        this.colormap[ColorMap.GREEN] = '#00aa00';
-        this.colormap[ColorMap.BLUE] = '#0000aa';
-        this.colormap[ColorMap.CYAN] = '#00aaaa';
-        this.colormap[ColorMap.MAGENTA] = '#aa00aa';
-        this.colormap[ColorMap.BROWN] = '#aaaa00';
-        this.colormap[ColorMap.LIGHT_GRAY] = '#aaaaaa';
-        this.colormap[ColorMap.DARK_GRAY] = '#444444';
-        this.colormap[ColorMap.LIGHT_RED] = '#ff4444';
-        this.colormap[ColorMap.LIGHT_GREEN] = '#44ff44';
-        this.colormap[ColorMap.LIGHT_BLUE] = '#4444ff';
-        this.colormap[ColorMap.LIGHT_CYAN] = '#44ffff';
-        this.colormap[ColorMap.LIGHT_MAGENTA] = '#ff44ff';
-        this.colormap[ColorMap.YELLOW] = '#ffff44';
-        this.colormap[ColorMap.WHITE] = '#ffffff';
-    }
-
-
-    static get(x) {
-        return this.colormap[x];
-    }
-
-    // Extra colors
+    // Extra colors // look and feel approximations
     static P1_Green_528nm = '#41FF00';
     static P3_Amber_600nm = '#FFB000';
     static P3_LightAmber_593nm = '#FFCC00';
@@ -212,5 +125,3 @@ class ColorMap {
     static p70amber2 = '#FFA500'; // warm amber
     static p70amber3 = '#FFD700'; // golden orange
 }
-
-ColorMap.use_VGA();

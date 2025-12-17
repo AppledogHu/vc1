@@ -1,0 +1,5 @@
+.idea/
+.editorconfig
+.gitignore
+/php/hitcounter/hitcount_vc1.txt
+/php/hitcounter/userhits_vc1.txt

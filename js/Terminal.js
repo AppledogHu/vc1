@@ -1,3 +1,10 @@
+// VC-1 Computer System
+// Copyright (C) 2023 Appledog Hu
+//
+// SPDX-License-Identifier: GPL-2.0-only WITH VC-1-runtime-exception
+// See LICENSE file for details.
+//
+
 class Terminal {
     constructor(cols, rows) {
         this.charWidth = 18;
@@ -5,8 +12,8 @@ class Terminal {
         this.cols = cols;
         this.rows = rows;
         this.theme = 'P70';
-        this.color = ColorMap.p70amber2;
-        this.background = ColorMap.ibm3270_amber2d7;
+        this.color = Color.p70amber2;
+        this.background = Color.ibm3270_amber2d7;
 
         // input() echo
         this.input_mode = false;
@@ -73,14 +80,6 @@ class Terminal {
         this.buf[y][x].color = color;
         this.buf[y][x].background = background;
     }
-
-//    setColor(c) {
-//        this.color = c
-//    }
-
-//    setBkg(b) {
-//        this.background = background
-//    }
 
     type(key) {
         if (key.length == 1) {
@@ -186,7 +185,7 @@ class Terminal {
     terminal_control_enter() {
         // If we are in input mode, we send the input() command to the event queue.
         // This input_str was specially constructed elsewhere so we ignore s.
-        if (this.inputmode) {
+        if (this.input_mode) {
             let a = this.input_command + " " + this.input_str;
             console.log("input: " + a);
             event_queue.push(a);
@@ -277,38 +276,38 @@ class Terminal {
 
         if (s === 'p1') {
             console.log("changing theme to p1");
-            this.setTheme('p1', ColorMap.ibm3270_green1, ColorMap.ibm3270_green2);
+            this.setTheme('p1', Color.ibm3270_green1, Color.ibm3270_green2);
             return;
         }
 
         if (s === 'p3') {
             console.log("changing theme to p3");
-            this.setTheme('p3', ColorMap.ibm3270_amber1, ColorMap.ibm3270_amber2);
+            this.setTheme('p3', Color.ibm3270_amber1, Color.ibm3270_amber2);
             return;
         }
 
         if (s === 'p70') {
             console.log("changing theme to IBM P70 Portable");
-            this.setTheme('P70', ColorMap.p70amber2, ColorMap.ibm3270_amber2d7);
+            this.setTheme('P70', Color.p70amber2, Color.ibm3270_amber2d7);
             return;
         }
 
 
         if ((s === 'p3d') || (s === 'p3dark') || (s === 'p3-dark')) {
             console.log("changing theme to p3-dark");
-            this.setTheme('p3', ColorMap.ibm3270_amber1d4, ColorMap.ibm3270_amber2d7);
+            this.setTheme('p3', Color.ibm3270_amber1d4, Color.ibm3270_amber2d7);
             return;
         }
 
         if (s === 'vga') {
             console.log("changing theme to VGA");
-            this.setTheme('vga', ColorMap.lightgray, ColorMap.black);
+            this.setTheme('vga', Color.lightgray, Color.black);
             return;
         }
 
         if (s === 'notheme') {
             console.log("changing theme to none");
-            this.setTheme('', ColorMap.lightgray, ColorMap.black);
+            this.setTheme('', Color.lightgray, Color.black);
             return;
         }
 
@@ -338,8 +337,15 @@ class Terminal {
             l.line = l.line.trim();
             console.log("Line number detected... " + l.num);
             console.log("program command: [" + l.line + "]");
-            //event_queue.push("BASIC " + s);
-            this.program[l.num] = l.line;
+
+
+            if (l.line.length === 0) {
+                delete this.program[l.num];
+            } else {
+                // Otherwise, store it
+                this.program[l.num] = l.line;
+            }
+
             return;
         }
 
@@ -550,15 +556,16 @@ class Terminal {
 
         // Calculate the actual position on the canvas based on character width and height
         const xPos = x * this.charWidth;
-        const yPos = (y * this.charHeight);
+        const yPos = y * this.charHeight;
 
 
-        // Set the background
-        ctx.fillStyle = background;
+
+        // Draw the background as color number or hex string/color-name string
+        ctx.fillStyle = (typeof background === 'number') ? ColorMap.get(background) : background;
         ctx.fillRect(xPos, yPos, this.charWidth, this.charHeight);
 
-        // Draw the character on the canvas
-        ctx.fillStyle = color;
+        // Draw the character as color number or hex string/color-name string
+        ctx.fillStyle = (typeof color === 'number') ? ColorMap.get(color) : color;
         ctx.fillText(ch, xPos, yPos + this.font_yadj);
 
     }
@@ -570,7 +577,9 @@ class Terminal {
                 const ch = this.buf[y][x].ch;
                 const fg = this.buf[y][x].color;
                 const bg = this.buf[y][x].background;
-                this.drawCharacter(ctx, x, y, ch, fg, bg);
+
+                this.drawCharacter(ctx, x, y, ch, fg, bg);// draw the cursor
+
             }
         }
 
@@ -578,7 +587,7 @@ class Terminal {
         if (this.cursor && this.cc) {
             const xPos = this.cx * this.charWidth;
             const yPos = (this.cy * this.charHeight);
-            ctx.fillStyle = this.color;
+            ctx.fillStyle = (typeof this.color === 'number') ? ColorMap.get(this.color) : this.color;
             ctx.fillText("\u005F", xPos, yPos + this.font_yadj);
         }
     }
@@ -634,6 +643,7 @@ class Terminal {
         }
     }
 
+    // Add this method somewhere in the Terminal class
     separateDigitsAndCode(inputString) {
         // Initialize variables
         var line_no = "";

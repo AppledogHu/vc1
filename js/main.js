@@ -1,3 +1,10 @@
+// VC-1 Computer System
+// Copyright (C) 2023 Appledog Hu
+//
+// SPDX-License-Identifier: GPL-2.0-only WITH VC-1-runtime-exception
+// See LICENSE file for details.
+//
+
 //
 // JavaScript Terminal v3.0
 // (Technical Demo Mode)
@@ -20,12 +27,8 @@ var terminal = new Terminal(10, 10)
 // Terminal Control
 terminal.echo = true;       // this is on by default but I am putting it here anyways.
 terminal.cc;                // Cursor control (true/false for on/off)
-terminal.inputmode = false; // In input mode, we simulate an input() command but will lose context.
-var terminalmode = true;    // if the terminal should capture certain commands when you press enter.
-var touchmode = false;      // in touch mode, cursor is moved by mouse.
-
-// Program control
-var runmode = false;        // this begins 'programming queue' execution.
+terminal.input_mode = false; // In input mode, we simulate an input() command but will lose context.
+var touch_mode = false;      // in touch mode, cursor is moved by mouse.
 
 // load font
 var fontLoader = new FontLoader('myvga', 'PxPlus_IBM_VGA_9x16.ttf');
@@ -97,7 +100,7 @@ canvas.addEventListener('click', function (event) {
     console.log(event);
 
     // do not process clicks unless we're in touch mode.
-    if (touchmode == false) {
+    if (touch_mode == false) {
         return;
     }
 
@@ -204,12 +207,32 @@ function update() {
                 console.log("KEY event: [" + para + "]");
                 terminal.type(para);    // type to terminal.
                 break;
+
+            case 'INPUT_TEST':
+                console.log("INPUT_TEST received: [" + para + "]");
+                terminal.cr();
+                terminal.lf();
+                terminal.puts("You typed: " + para);
+                terminal.cr();
+                terminal.lf();
+                break;
+
             default:
                 console.log("unknown event: " + cmd + " " + para);
                 break;
         } // switch
     } // while has events
 } // check_events
+
+function splitIfStartsWith(str, prefix) {
+    if (str.startsWith(prefix)) {
+        const a = prefix;
+        const b = str.slice(prefix.length);
+        return [a, b];
+    } else {
+        return null; // or [null, str], depending on what you want
+    }
+}
 
 // All we really need to do is draw the terminal.
 // What is on the terminal is done using (ex.) Terminal.setch()
@@ -262,7 +285,7 @@ function waitForFonts() {
 waitForFonts()
 
 async function fetchData() {
-    const phpScriptURL = 'php/hitcounter.php?key=jttd3';
+    const phpScriptURL = 'php/hitcounter.php?key=vc1';
 
     try {
         const response = await fetch(phpScriptURL);

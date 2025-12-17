@@ -1,3 +1,10 @@
+// VC-1 Computer System
+// Copyright (C) 2023 Appledog Hu
+//
+// SPDX-License-Identifier: GPL-2.0-only WITH VC-1-runtime-exception
+// See LICENSE file for details.
+//
+
 // Maps have tiles.
 
 class Tile {
